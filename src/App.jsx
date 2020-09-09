@@ -1,8 +1,9 @@
 import { h } from 'preact'
+import * as classes from './App.css'
 
 const App = () => {
 	return (
-		<div>heres my app</div>
+		<div className={classes.app}>heres my app</div>
 	)
 }
 

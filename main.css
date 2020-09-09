@@ -4,9 +4,17 @@
 	/* font-stretch: expanded; */
 }
 
-body, html, #app {
+body, html {
 	height: 100%;
+	padding: 0;
+	margin: 0;
 	font-family: 'Andy Bold', cursive;
+}
+
+:global(#app) {
+	height: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 div {
