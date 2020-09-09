@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'Andy Bold';
+	src: url('src/static/fonts/andyBold.ttf');
+	/* font-stretch: expanded; */
+}
+
+body, html, #app {
+	height: 100%;
+	font-family: 'Andy Bold', cursive;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5 {
+	margin: 0;
+}
