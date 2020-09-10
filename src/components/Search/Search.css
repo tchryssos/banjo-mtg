@@ -1,0 +1,16 @@
+.searchInput {
+	margin-top: 16px;
+	height: 32px;
+	font-size: 16px;
+	border-radius: 8px;
+	text-align: center;
+	width: 50%;
+}
+
+.submit {
+	width: 33%;
+	height: 32px;
+	margin-top: 8px;
+	border-radius: 8px;
+	font-size: 16px;
+}
