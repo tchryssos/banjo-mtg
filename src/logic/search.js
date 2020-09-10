@@ -43,7 +43,7 @@ export const cardSearch = (searchVal) => {
 				throw responseData.error
 			}
 			if (!isCardId(searchVal) && !responseData.cards.length) {
-				throw new Error('No cards found with that name. Please try again.')
+				throw 'No cards found with that name. Please try again.'
 			}
 			return cardSuccess(responseData, searchVal)
 		})
