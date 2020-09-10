@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import * as classes from './App.css'

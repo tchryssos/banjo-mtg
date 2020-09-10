@@ -8,8 +8,8 @@ import * as classes from './Search.css'
 const Search = () => {
 	const [searchVal, setSearchVal] = useState('')
 	const onChange = (e) => setSearchVal(e.target.value)
-	const onSubmit = () => {
-		cardSearch(searchVal)
+	const onSubmit = async () => {
+		await cardSearch(searchVal)
 		setSearchVal('')
 	}
 	return (

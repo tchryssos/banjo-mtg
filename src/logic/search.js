@@ -2,9 +2,10 @@ import checkSimilarity, { createNGram } from '/src/logic/utils/checkSimilarity'
 
 const isCardId = (id) => !!parseInt(id, 10)
 
-const fetchCard = (searchVal) => {
+const fetchCard = async (searchVal) => {
 	const fetchTail = isCardId(searchVal) ? searchVal : `?name=${searchVal}`
-	return fetch(`https://api.magicthegathering.io/v1/cards/${fetchTail}`)
+	const resp = await fetch(`https://api.magicthegathering.io/v1/cards/${fetchTail}`)
+	return resp.json()
 }
 
 const cardSuccess = (responseData, searchVal) => {
@@ -32,22 +33,16 @@ const cardSuccess = (responseData, searchVal) => {
 	).data
 }
 
-export const cardSearch = (searchVal) => {
+export const cardSearch = async (searchVal) => {
 	if (!searchVal) {
-		throw new Error('Please include a card ID or name')
+		return console.warn('Please include a card ID or name')
 	}
-	fetchCard(searchVal)
-		.then((responsePromise) => responsePromise.json())
-		.then((responseData) => {
-			if (responseData.error) {
-				throw responseData.error
-			}
-			if (!isCardId(searchVal) && !responseData.cards.length) {
-				throw 'No cards found with that name. Please try again.'
-			}
-			return cardSuccess(responseData, searchVal)
-		})
-		.catch((error) => {
-			throw new Error(error)
-		})
+	const resp = await fetchCard(searchVal)
+	if (resp.error) {
+		return console.warn(resp.error)
+	}
+	if (!isCardId(searchVal) && !resp.cards.length) {
+		return console.warn('No cards found with that name. Please try again.')
+	}
+	return cardSuccess(resp, searchVal)
 }
