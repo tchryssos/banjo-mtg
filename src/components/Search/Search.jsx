@@ -1,13 +1,15 @@
 import { h, Fragment } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { cardSearch } from '/src/logic/search'
+
 import * as classes from './Search.css'
 
 const Search = () => {
 	const [searchVal, setSearchVal] = useState('')
 	const onChange = (e) => setSearchVal(e.target.value)
 	const onSubmit = () => {
-		console.log(searchVal)
+		cardSearch(searchVal)
 		setSearchVal('')
 	}
 	return (
