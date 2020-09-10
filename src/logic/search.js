@@ -39,6 +39,9 @@ export const cardSearch = (searchVal) => {
 	fetchCard(searchVal)
 		.then((responsePromise) => responsePromise.json())
 		.then((responseData) => {
+			if (responseData.error) {
+				throw responseData.error
+			}
 			if (!isCardId(searchVal) && !responseData.cards.length) {
 				throw new Error('No cards found with that name. Please try again.')
 			}
