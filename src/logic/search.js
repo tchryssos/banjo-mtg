@@ -35,14 +35,14 @@ const cardSuccess = (responseData, searchVal) => {
 
 export const cardSearch = async (searchVal) => {
 	if (!searchVal) {
-		return console.warn('Please include a card ID or name')
+		return { error: 'Please include a card ID or name' }
 	}
 	const resp = await fetchCard(searchVal)
 	if (resp.error) {
-		return console.warn(resp.error)
+		return { error: resp.error }
 	}
 	if (!isCardId(searchVal) && !resp.cards.length) {
-		return console.warn('No cards found with that name. Please try again.')
+		return { error: 'No cards found with that name. Please try again.' }
 	}
 	return cardSuccess(resp, searchVal)
 }

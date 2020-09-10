@@ -1,16 +1,23 @@
 import { h, Fragment } from 'preact'
-import { useState } from 'preact/hooks'
+import { useState, useContext } from 'preact/hooks'
 
 import { cardSearch } from '/src/logic/search'
+import CardContext from '/src/logic/contexts/card'
 
 import * as classes from './Search.css'
 
 const Search = () => {
+	const { setCardData } = useContext(CardContext)
 	const [searchVal, setSearchVal] = useState('')
 	const onChange = (e) => setSearchVal(e.target.value)
 	const onSubmit = async () => {
-		await cardSearch(searchVal)
-		setSearchVal('')
+		const data = await cardSearch(searchVal)
+		if (data.error) {
+			console.warn(data.error)
+		} else {
+			setCardData(data)
+			setSearchVal('')
+		}
 	}
 	return (
 		<Fragment>

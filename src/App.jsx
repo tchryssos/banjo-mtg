@@ -13,8 +13,9 @@ import BanjoJace from '/src/static/images/banjo_jace.png'
 
 const App = () => {
 	const [cardData, setCardData] = useState()
+	console.log(cardData)
 	return (
-		<CardContext.Provider value={cardData, setCardData}>
+		<CardContext.Provider value={{ cardData, setCardData }}>
 			<div className={classes.app}>
 				<div className={classes.banjoJaceWrapper}>
 					<Image
