@@ -14,3 +14,18 @@
 	border-radius: 8px;
 	font-size: 16px;
 }
+
+@keyframes loadingRotate {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);}
+}
+
+.loadingIcon {
+	margin: 16px;
+	height: 48px;
+	width: 48px;
+	animation-name: loadingRotate;
+	animation-duration: .7s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}

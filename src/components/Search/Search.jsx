@@ -1,9 +1,11 @@
 import { h, Fragment } from 'preact'
 import { useState, useContext } from 'preact/hooks'
 
+import Loading from '/src/components/icons/Loading'
+
 import { cardSearch } from '/src/logic/search'
 import CardContext from '/src/logic/contexts/card'
-import ternary from '/src/logic/utils/ternary'
+import orNull from '/src/logic/utils/orNull'
 
 import * as classes from './Search.css'
 
@@ -37,12 +39,12 @@ const Search = () => {
 				className={classes.submit}
 				disabled={isLoading}
 			>
-				{ternary(
-					isLoading,
-					'Searching...',
-					'Submit'
-				)}
+				Submit
 			</button>
+			{orNull(
+				isLoading,
+				<Loading className={classes.loadingIcon} />,
+			)}
 		</Fragment>
 	)
 }
