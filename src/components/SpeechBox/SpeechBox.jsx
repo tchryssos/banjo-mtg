@@ -1,5 +1,5 @@
 import { h } from 'preact'
-import { useContext } from 'preact/hooks'
+import { useContext, useRef, useState } from 'preact/hooks'
 
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
@@ -13,8 +13,13 @@ import { CHARACTER_DATA } from '/src/constants/character'
 import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
+	const [cardText, setCardText] = useState('')
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
+	const syllableTimeoutsRef = useRef([])
+	const wordTimeoutsRef = useRef([])
+	const cardDescriptionRef = useRef()
+
 	const characterData = CHARACTER_DATA[character]
 
 	return orNull(
@@ -26,7 +31,7 @@ const SpeechBox = ({ className }) => {
 					alt={character}
 					className={classes.characterHead}
 				/>
-				<div className={classes.cardDesc}>
+				<div className={classes.cardDesc} ref={cardDescriptionRef}>
 					<Body>{ cardData?.text || cardData?.flavor}</Body>
 				</div>
 			</div>
@@ -35,5 +40,3 @@ const SpeechBox = ({ className }) => {
 }
 
 export default SpeechBox
-
-// {cardData?.text || cardData?.flavor}
