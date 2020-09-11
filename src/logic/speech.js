@@ -131,7 +131,7 @@ export const speakAndSet = ({
 			const audioDuration = Math.ceil(audioArray.reduce(
 				(totalTime, audioObj) => totalTime += (audioObj.duration * audioTimeMult), 0
 			))
-			wordTimeouts.push(setTimeout(
+			wordTimeouts.current.push(setTimeout(
 				() => playSyllablePushWord(
 					syllables, audioArray, sylTimeouts, boxText, setBoxText,
 					descriptionElement,

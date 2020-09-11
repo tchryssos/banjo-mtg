@@ -16,7 +16,7 @@ const Search = () => {
 	const onChange = (e) => setSearchVal(e.target.value)
 	const onSubmit = async () => {
 		setIsLoading(true)
-		const data = await cardSearch(searchVal)
+		const data = await cardSearch(searchVal, setCardData)
 		setIsLoading(false)
 		if (data.error) {
 			console.warn(data.error)

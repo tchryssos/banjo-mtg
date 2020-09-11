@@ -6,6 +6,7 @@ import {
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
 import orNull from '/src/logic/utils/orNull'
+import { speakAndSet } from '/src/logic/speech'
 
 import Image from '/src/components/Image'
 import Body from '/src/components/typography/Body'
@@ -15,7 +16,7 @@ import { CHARACTER_DATA } from '/src/constants/character'
 import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
-	const [cardText, setCardText] = useState('')
+	const [characterText, setCharacterText] = useState('')
 	const [audioArray, setAudioArray] = useState([])
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
@@ -44,6 +45,20 @@ const SpeechBox = ({ className }) => {
 			}
 		}
 	}, [character])
+
+	useEffect(() => {
+		if (cardData && cardDescriptionRef.current) {
+			speakAndSet({
+				responseText: cardData.text || cardData.flavor,
+				boxText: characterText,
+				setBoxText: setCharacterText,
+				voiceArray: audioArray,
+				sylTimeouts: syllableTimeoutsRef,
+				wordTimeouts: wordTimeoutsRef,
+				descriptionElement: cardDescriptionRef,
+			})
+		}
+	}, [cardData, cardDescriptionRef.current])
 
 	return orNull(
 		cardData,

@@ -33,10 +33,11 @@ const cardSuccess = (responseData, searchVal) => {
 	).data
 }
 
-export const cardSearch = async (searchVal) => {
+export const cardSearch = async (searchVal, setCardData) => {
 	if (!searchVal) {
 		return { error: 'Please include a card ID or name' }
 	}
+	setCardData(null)
 	const resp = await fetchCard(searchVal)
 	if (resp.error) {
 		return { error: resp.error }
