@@ -1,0 +1,11 @@
+.textBox {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 25px;
+	padding: 16px;
+	color: white;
+	width: 100%;
+	min-height: 2rem;
+	align-items: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
