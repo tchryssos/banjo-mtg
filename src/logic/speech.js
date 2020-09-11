@@ -23,6 +23,12 @@ const playAudio = (audio, audioArray) => {
 	audio.currentTime = 0
 	audio.play()
 }
+
+const stopAllAudio = (audioArray) => {
+	audioArray.forEach(audio => (
+		audio.src = ''
+	))
+}
 // END - AUDIO PLAYBACK - END
 
 // START - SYLLABLE - START

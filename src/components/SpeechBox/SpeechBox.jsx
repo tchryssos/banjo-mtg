@@ -1,5 +1,7 @@
 import { h } from 'preact'
-import { useContext, useRef, useState } from 'preact/hooks'
+import {
+	useContext, useRef, useState, useEffect,
+} from 'preact/hooks'
 
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
@@ -14,6 +16,7 @@ import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
 	const [cardText, setCardText] = useState('')
+	const [audioArray, setAudioArray] = useState([])
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
 	const syllableTimeoutsRef = useRef([])
@@ -21,6 +24,26 @@ const SpeechBox = ({ className }) => {
 	const cardDescriptionRef = useRef()
 
 	const characterData = CHARACTER_DATA[character]
+
+	useEffect(() => {
+		if (characterData) {
+			const { low, mid, hi } = characterData.audio
+			const sampleArray = [low, mid, hi]
+			if (audioArray.length) {
+				setAudioArray([
+					...audioArray.map(
+						(audioEl, i) => audioEl.src = sampleArray[i]
+					)
+				])
+			} else {
+				setAudioArray(
+					sampleArray.map(
+						(sample) => new Audio(sample)
+					)
+				)
+			}
+		}
+	}, [character])
 
 	return orNull(
 		cardData,
