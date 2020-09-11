@@ -6,6 +6,7 @@ import CharacterContext from '/src/logic/contexts/character'
 import orNull from '/src/logic/utils/orNull'
 
 import Image from '/src/components/Image'
+import Body from '/src/components/typography/Body'
 
 import { CHARACTER_DATA } from '/src/constants/character'
 
@@ -20,9 +21,14 @@ const SpeechBox = ({ className }) => {
 		cardData,
 		(
 			<div className={`${className} ${classes.textBox}`}>
-				{/* <Image>
-
-				</Image> */}
+				<Image
+					src={characterData.icon}
+					alt={character}
+					className={classes.characterHead}
+				/>
+				<div className={classes.cardDesc}>
+					<Body>{ cardData?.text || cardData?.flavor}</Body>
+				</div>
 			</div>
 		),
 	)

@@ -6,7 +6,7 @@ import * as classes from './App.css'
 import Image from '/src/components/Image'
 import Body from '/src/components/typography/Body'
 import Search from '/src/components/Search'
-// import SpeechBox from '/src/components/SpeechBox'
+import SpeechBox from '/src/components/SpeechBox'
 import Title from '/src/components/typography/Title'
 
 import CardContext from '/src/logic/contexts/card'
@@ -40,7 +40,7 @@ const App = () => {
 							cardData,
 							<Title>{cardData?.name}</Title>
 						)}
-						{/* <SpeechBox /> */}
+						<SpeechBox />
 					</div>
 				</div>
 			</CharacterContext.Provider>
