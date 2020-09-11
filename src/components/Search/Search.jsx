@@ -22,8 +22,8 @@ const Search = () => {
 			console.warn(data.error)
 		} else {
 			setCardData(data)
-			setSearchVal('')
 		}
+		setSearchVal('')
 	}
 	return (
 		<Fragment>
