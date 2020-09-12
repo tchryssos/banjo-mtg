@@ -80,10 +80,10 @@ const syllableWordChunker = (word) => {
 	return wordChunkObj.chunkedWord.filter(x => x)
 }
 
-const playSyllablePushWord = (
+const playSyllablePushWord = ({
 	syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
 	descriptionElement, setIsSpeaking, isLastWord,
-) => {
+}) => {
 	audioArray.forEach(
 		(audio, i) => {
 			syllableTimeoutsRef.current.push(setTimeout(() => {
@@ -142,10 +142,10 @@ export const speakAndSet = ({
 			wordTimeoutsRef.current.push(setTimeout(
 				() => {
 					const isLastWord = i === words.length - 1
-					playSyllablePushWord(
+					playSyllablePushWord({
 						syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
 						descriptionElement, setIsSpeaking, isLastWord,
-					)
+					})
 				}, speechPause,
 			))
 			speechPause += audioDuration
