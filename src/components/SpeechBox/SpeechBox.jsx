@@ -17,11 +17,12 @@ import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
 	const [audioArray, setAudioArray] = useState([])
+	const [isSpeaking, setIsSpeaking] = useState(false)
 	const [displayText, setDisplayText] = useState('')
 
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
-	
+
 	const textRef = useRef('')
 	const syllableTimeoutsRef = useRef([])
 	const wordTimeoutsRef = useRef([])
@@ -59,6 +60,7 @@ const SpeechBox = ({ className }) => {
 				syllableTimeoutsRef,
 				wordTimeoutsRef,
 				descriptionElement: cardDescriptionRef,
+				setIsSpeaking,
 			})
 		}
 	}, [cardData])
@@ -70,7 +72,10 @@ const SpeechBox = ({ className }) => {
 				<Image
 					src={characterData.icon}
 					alt={character}
-					className={classes.characterHead}
+					className={`
+						${classes.characterHead}${' '}
+						${isSpeaking && classes.speakingHead}
+					`}
 				/>
 				<div className={classes.cardDesc} ref={cardDescriptionRef}>
 					<Body>{displayText}</Body>

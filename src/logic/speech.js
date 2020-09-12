@@ -82,7 +82,7 @@ const syllableWordChunker = (word) => {
 
 const playSyllablePushWord = (
 	syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-	descriptionElement,
+	descriptionElement, setIsSpeaking, isLastWord,
 ) => {
 	audioArray.forEach(
 		(audio, i) => {
@@ -94,6 +94,9 @@ const playSyllablePushWord = (
 				// aka the end of the word
 				if (i === audioArray.length - 1) {
 					newText = `${newText} `
+					if (isLastWord) {
+						setIsSpeaking(false)
+					}
 				}
 				textRef.current = newText
 				setDisplayText(newText)
@@ -110,12 +113,15 @@ const samplePicker = (voiceArray) => voiceArray[Math.floor(
 
 export const speakAndSet = ({
 		responseText, textRef, voiceArray, syllableTimeoutsRef, setDisplayText,
-		wordTimeoutsRef,descriptionElement,
-	}) => {
+		wordTimeoutsRef,descriptionElement, setIsSpeaking,
+}) => {
+	setDisplayText('')
+	textRef.current = ''
+	setIsSpeaking(true)
 	const words = responseText.split(/\s/)
 	let speechPause = 0
 	words.forEach(
-		(word) => {
+		(word, i) => {
 			/*
 				1) Get an array of the given word's syllable break points
 				2) Get an array consisting of one audio sample per syllable
@@ -134,11 +140,13 @@ export const speakAndSet = ({
 				(totalTime, audioObj) => totalTime += (audioObj.duration * audioTimeMult), 0
 			))
 			wordTimeoutsRef.current.push(setTimeout(
-				() => playSyllablePushWord(
-					syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-					descriptionElement,
-				),
-				speechPause,
+				() => {
+					const isLastWord = i === words.length - 1
+					playSyllablePushWord(
+						syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
+						descriptionElement, setIsSpeaking, isLastWord,
+					)
+				}, speechPause,
 			))
 			speechPause += audioDuration
 		}
