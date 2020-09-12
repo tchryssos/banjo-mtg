@@ -16,10 +16,13 @@ import { CHARACTER_DATA } from '/src/constants/character'
 import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
-	const [characterText, setCharacterText] = useState('')
 	const [audioArray, setAudioArray] = useState([])
+	const [displayText, setDisplayText] = useState('')
+
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
+	
+	const textRef = useRef('')
 	const syllableTimeoutsRef = useRef([])
 	const wordTimeoutsRef = useRef([])
 	const cardDescriptionRef = useRef()
@@ -50,15 +53,15 @@ const SpeechBox = ({ className }) => {
 		if (cardData && cardDescriptionRef.current) {
 			speakAndSet({
 				responseText: cardData.text || cardData.flavor,
-				boxText: characterText,
-				setBoxText: setCharacterText,
+				textRef,
+				setDisplayText,
 				voiceArray: audioArray,
-				sylTimeouts: syllableTimeoutsRef,
-				wordTimeouts: wordTimeoutsRef,
+				syllableTimeoutsRef,
+				wordTimeoutsRef,
 				descriptionElement: cardDescriptionRef,
 			})
 		}
-	}, [cardData, cardDescriptionRef.current])
+	}, [cardData])
 
 	return orNull(
 		cardData,
@@ -70,7 +73,7 @@ const SpeechBox = ({ className }) => {
 					className={classes.characterHead}
 				/>
 				<div className={classes.cardDesc} ref={cardDescriptionRef}>
-					<Body>{ cardData?.text || cardData?.flavor}</Body>
+					<Body>{displayText}</Body>
 				</div>
 			</div>
 		),

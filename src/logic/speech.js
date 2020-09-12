@@ -6,7 +6,7 @@ const audioTimeMult = 850
 
 // START - STYLE - START
 const descriptionOverflow = (descriptionElement) => {
-	const { descEl } = descriptionElement.current
+	const descEl = descriptionElement.current
 	if (descEl.offsetHeight < descEl.scrollHeight) {
 		descEl.scrollTop = descEl.scrollHeight
 	}
@@ -81,20 +81,22 @@ const syllableWordChunker = (word) => {
 }
 
 const playSyllablePushWord = (
-	syllables, audioArray, sylTimeouts, boxText, setBoxText,
+	syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
 	descriptionElement,
 ) => {
 	audioArray.forEach(
 		(audio, i) => {
-			sylTimeouts.current.push(setTimeout(() => {
+			syllableTimeoutsRef.current.push(setTimeout(() => {
 				playAudio(audio, audioArray)
-				let newText = `${boxText}${syllables}`
+				// @TODO return list of syllables to component and set up the timeouts there
+				let newText = `${textRef.current}${syllables[i]}`
 				// add a space if this is the last time through the loop
 				// aka the end of the word
 				if (i === audioArray.length - 1) {
 					newText = `${newText} `
 				}
-				setBoxText(newText)
+				textRef.current = newText
+				setDisplayText(newText)
 				descriptionOverflow(descriptionElement)
 			}, (i * audio.duration * audioTimeMult)))
 		}
@@ -107,8 +109,8 @@ const samplePicker = (voiceArray) => voiceArray[Math.floor(
 )]
 
 export const speakAndSet = ({
-		responseText, boxText, setBoxText, voiceArray, sylTimeouts,
-		wordTimeouts, descriptionElement,
+		responseText, textRef, voiceArray, syllableTimeoutsRef, setDisplayText,
+		wordTimeoutsRef,descriptionElement,
 	}) => {
 	const words = responseText.split(/\s/)
 	let speechPause = 0
@@ -131,12 +133,12 @@ export const speakAndSet = ({
 			const audioDuration = Math.ceil(audioArray.reduce(
 				(totalTime, audioObj) => totalTime += (audioObj.duration * audioTimeMult), 0
 			))
-			wordTimeouts.current.push(setTimeout(
+			wordTimeoutsRef.current.push(setTimeout(
 				() => playSyllablePushWord(
-					syllables, audioArray, sylTimeouts, boxText, setBoxText,
+					syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
 					descriptionElement,
 				),
-				speechPause
+				speechPause,
 			))
 			speechPause += audioDuration
 		}
