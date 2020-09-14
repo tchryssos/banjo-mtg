@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import {
-	useContext, useRef, useState, useEffect,
+	useContext, useRef, useState, useEffect, useCallback,
 } from 'preact/hooks'
 
 import CardContext from '/src/logic/contexts/card'
@@ -27,17 +27,21 @@ const SpeechBox = ({ className }) => {
 	const syllableTimeoutsRef = useRef([])
 	const wordTimeoutsRef = useRef([])
 	const cardDescriptionRef = useRef()
+	const isInitializedRef = useRef(false)
 
 	const characterData = CHARACTER_DATA[character]
 
-	useEffect(() => {
+	const setOrResetSamples = useCallback(() => {
 		if (characterData) {
 			const { low, mid, hi } = characterData.audio
 			const sampleArray = [low, mid, hi]
 			if (audioArray.length) {
 				setAudioArray([
 					...audioArray.map(
-						(audioEl, i) => audioEl.src = sampleArray[i]
+						(audioEl, i) => {
+							audioEl.src = sampleArray[i]
+							return audioEl
+						}
 					)
 				])
 			} else {
@@ -50,18 +54,44 @@ const SpeechBox = ({ className }) => {
 		}
 	}, [character])
 
+	const reset = useCallback(() => {
+		audioArray.forEach(
+			(audio) => audio.src = ''
+		)
+		textRef.current = ''
+		syllableTimeoutsRef.current.forEach(
+			(to) => clearTimeout(to)
+		)
+		wordTimeoutsRef.current.forEach(
+			(to) => clearTimeout(to)
+		)
+		setDisplayText('')
+	}, [audioArray])
+
 	useEffect(() => {
-		if (cardData && cardDescriptionRef.current) {
-			speakAndSet({
-				responseText: cardData.text || cardData.flavor,
-				textRef,
-				setDisplayText,
-				voiceArray: audioArray,
-				syllableTimeoutsRef,
-				wordTimeoutsRef,
-				descriptionElement: cardDescriptionRef,
-				setIsSpeaking,
-			})
+		reset()
+		setOrResetSamples()
+	}, [character])
+
+	useEffect(() => {
+		if (isInitializedRef.current) { // Only run this after initialization of component
+			if (cardData && cardDescriptionRef.current) {
+				speakAndSet({
+					responseText: cardData.text || cardData.flavor,
+					textRef,
+					setDisplayText,
+					voiceArray: audioArray,
+					syllableTimeoutsRef,
+					wordTimeoutsRef,
+					descriptionElement: cardDescriptionRef,
+					setIsSpeaking,
+				})
+			} else { // cardData gets reset to null before a search
+				reset()
+				setOrResetSamples()
+			}
+		} else {
+			isInitializedRef.current = true
 		}
 	}, [cardData])
 

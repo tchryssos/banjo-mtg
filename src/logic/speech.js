@@ -6,9 +6,11 @@ const audioTimeMult = 850
 
 // START - STYLE - START
 const descriptionOverflow = (descriptionElement) => {
-	const descEl = descriptionElement.current
-	if (descEl.offsetHeight < descEl.scrollHeight) {
-		descEl.scrollTop = descEl.scrollHeight
+	if (descriptionElement.current) {
+		const descEl = descriptionElement.current
+		if (descEl.offsetHeight < descEl.scrollHeight) {
+			descEl.scrollTop = descEl.scrollHeight
+		}
 	}
 }
 // END - STYLE - END
@@ -22,12 +24,6 @@ const playAudio = (audio, audioArray) => {
 	})
 	audio.currentTime = 0
 	audio.play()
-}
-
-const stopAllAudio = (audioArray) => {
-	audioArray.forEach(audio => (
-		audio.src = ''
-	))
 }
 // END - AUDIO PLAYBACK - END
 
@@ -115,8 +111,6 @@ export const speakAndSet = ({
 		responseText, textRef, voiceArray, syllableTimeoutsRef, setDisplayText,
 		wordTimeoutsRef,descriptionElement, setIsSpeaking,
 }) => {
-	setDisplayText('')
-	textRef.current = ''
 	setIsSpeaking(true)
 	const words = responseText.split(/\s/)
 	let speechPause = 0
