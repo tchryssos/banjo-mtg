@@ -10,6 +10,7 @@ import { CHARACTER_DATA } from '/src/constants/character'
 import MenuIcon from '/src/components/icons/Menu'
 import XIcon from '/src/components/icons/X'
 import Body from '/src/components/typography/Body'
+import CharacterPortrait from '/src/components/CharacterPortrait'
 
 import * as classes from './Menu.css'
 
@@ -30,9 +31,20 @@ const Button = ({ setIsMenuOpen, type, className }) => {
 	)
 }
 
-const CharacterSelectPortrait = ({ setCharacter, character, type }) => {
-
-}
+const CharacterSelectPortrait = ({ setCharacter, character, type }) => (
+	<button
+		onClick={() => setCharacter(type)}
+		className={`
+			${classes.selectButton} 
+			${character === type && classes.currentSelection}
+		`}
+	>
+		<CharacterPortrait
+			character={type}
+			shouldAnimate={character === type}
+		/>
+	</button>
+)
 
 const Menu = () => {
 	const { setCharacter, character } = useContext(CharacterContext)
@@ -56,6 +68,17 @@ const Menu = () => {
 							<Body className={classes.text}>
 								Select a character to read your cards
 							</Body>
+							<div className={classes.portraitRow}>
+								{Object.keys(CHARACTER_DATA).map(
+									(charKey) => (
+										<CharacterSelectPortrait
+											type={charKey}
+											character={character}
+											setCharacter={setCharacter}
+										/>
+									)
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

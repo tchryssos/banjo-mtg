@@ -1,8 +1,7 @@
 import { h } from 'preact'
-
 import { CHARACTER_DATA, BANJO } from '/src/constants/character'
-
 import Image from '/src/components/Image'
+import * as classes from './CharacterPortrait.css'
 
 const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO }) => {
 	const characterData = CHARACTER_DATA[character]
@@ -16,7 +15,7 @@ const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO 
 			<Image
 				src={characterData.icon}
 				alt={character}
-				className={className}
+				className={`${classes.portrait} ${className}`}
 			/>
 		</picture>
 	)

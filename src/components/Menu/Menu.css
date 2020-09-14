@@ -40,3 +40,13 @@
 .text {
 	color: white;
 }
+
+.portraitRow {
+	display: flex;
+}
+
+.selectButton {
+	background-color: transparent;
+	border: none;
+	border-radius: 4px;
+}

@@ -22,6 +22,7 @@ export const GRUNTILDA = 'gruntilda'
 
 export const CHARACTER_DATA = {
 	[BANJO]: {
+		name: BANJO,
 		audio: {
 			hi: banjoHi,
 			mid: banjoMid,
@@ -31,6 +32,7 @@ export const CHARACTER_DATA = {
 		animated: banjoAnimated
 	},
 	[KAZOOIE]: {
+		name: KAZOOIE,
 		audio: {
 			hi: kazooieHi,
 			mid: kazooieMid,
@@ -40,6 +42,7 @@ export const CHARACTER_DATA = {
 		animated: kazooieAnimated
 	},
 	[GRUNTILDA]: {
+		name: GRUNTILDA,
 		audio: {
 			hi: gruntyHi,
 			mid: gruntyMid,
