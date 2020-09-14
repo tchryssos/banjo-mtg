@@ -4,6 +4,7 @@ import { useState, useContext } from 'preact/hooks'
 import orNull from '/src/logic/utils/orNull'
 import ternary from '/src/logic/utils/ternary'
 import CharacterContext from '/src/logic/contexts/character'
+import CardContext from '/src/logic/contexts/card'
 
 import { CHARACTER_DATA } from '/src/constants/character'
 
@@ -31,9 +32,12 @@ const Button = ({ setIsMenuOpen, type, className }) => {
 	)
 }
 
-const CharacterSelectPortrait = ({ setCharacter, character, type }) => (
+const CharacterSelectPortrait = ({ setCharacter, setCardData, character, type }) => (
 	<button
-		onClick={() => setCharacter(type)}
+		onClick={() => {
+			setCardData(null)
+			setCharacter(type)
+		}}
 		className={`
 			${classes.selectButton} 
 			${character === type && classes.currentSelection}
@@ -48,6 +52,7 @@ const CharacterSelectPortrait = ({ setCharacter, character, type }) => (
 
 const Menu = () => {
 	const { setCharacter, character } = useContext(CharacterContext)
+	const { setCardData } = useContext(CardContext)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	return (
 		<Fragment>
@@ -75,6 +80,7 @@ const Menu = () => {
 											type={charKey}
 											character={character}
 											setCharacter={setCharacter}
+											setCardData={setCardData}
 										/>
 									)
 								)}
