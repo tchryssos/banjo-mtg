@@ -1,9 +1,3 @@
-// START - DEFS - START
-// Multiplier to convert seconds from audio duration to milliseconds
-// By dropping the multiplier from 1000, we're able to speed up playback.
-const audioTimeMult = 850
-// END - DEFS - END
-
 // START - STYLE - START
 const descriptionOverflow = (descriptionElement) => {
 	if (descriptionElement.current) {
@@ -78,7 +72,7 @@ const syllableWordChunker = (word) => {
 
 const playSyllablePushWord = ({
 	syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-	descriptionElement, setIsSpeaking, isLastWord,
+	descriptionElement, setIsSpeaking, isLastWord, audioSpeed,
 }) => {
 	audioArray.forEach(
 		(audio, i) => {
@@ -97,7 +91,7 @@ const playSyllablePushWord = ({
 				textRef.current = newText
 				setDisplayText(newText)
 				descriptionOverflow(descriptionElement)
-			}, (i * audio.duration * audioTimeMult)))
+			}, (i * audio.duration * audioSpeed)))
 		}
 	)
 }
@@ -108,8 +102,18 @@ const samplePicker = (voiceArray) => voiceArray[Math.floor(
 )]
 
 export const speakAndSet = ({
-		responseText, textRef, voiceArray, syllableTimeoutsRef, setDisplayText,
-		wordTimeoutsRef,descriptionElement, setIsSpeaking,
+		responseText,
+		textRef,
+		voiceArray,
+		syllableTimeoutsRef,
+		setDisplayText,
+		wordTimeoutsRef,
+		descriptionElement,
+		setIsSpeaking,
+		// Multiplier to convert seconds from audio duration to milliseconds
+		// By dropping the multiplier from 1000, we're able to speed up playback.
+		audioSpeed = 850
+
 }) => {
 	setIsSpeaking(true)
 	const words = responseText.split(/\s/)
@@ -131,14 +135,14 @@ export const speakAndSet = ({
 			const syllables = syllableWordChunker(word)
 			const audioArray = syllables.map(() => samplePicker(voiceArray))
 			const audioDuration = Math.ceil(audioArray.reduce(
-				(totalTime, audioObj) => totalTime += (audioObj.duration * audioTimeMult), 0
+				(totalTime, audioObj) => totalTime += (audioObj.duration * audioSpeed), 0
 			))
 			wordTimeoutsRef.current.push(setTimeout(
 				() => {
 					const isLastWord = i === words.length - 1
 					playSyllablePushWord({
 						syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-						descriptionElement, setIsSpeaking, isLastWord,
+						descriptionElement, setIsSpeaking, isLastWord, audioSpeed,
 					})
 				}, speechPause,
 			))

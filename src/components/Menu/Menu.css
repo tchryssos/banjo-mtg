@@ -49,4 +49,9 @@
 	background-color: transparent;
 	border: none;
 	border-radius: 4px;
+	filter: grayscale(1)
+}
+
+.currentSelection {
+	filter: grayscale(0)
 }

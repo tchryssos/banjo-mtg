@@ -11,7 +11,7 @@ import { speakAndSet } from '/src/logic/speech'
 import Body from '/src/components/typography/Body'
 import CharacterPortrait from '/src/components/CharacterPortrait'
 
-import { CHARACTER_DATA } from '/src/constants/character'
+import { CHARACTER_DATA, KAZOOIE, GRUNTILDA } from '/src/constants/character'
 
 import * as classes from './SpeechBox.css'
 
@@ -30,6 +30,20 @@ const SpeechBox = ({ className }) => {
 	const isInitializedRef = useRef(false)
 
 	const characterData = CHARACTER_DATA[character]
+
+	// Multiplier to convert seconds from audio duration to milliseconds
+	// By dropping the multiplier from 1000, we're able to speed up playback.
+	let audioSpeed
+	switch (character) {
+		case KAZOOIE:
+			audioSpeed = 1000
+			break
+		case GRUNTILDA:
+			audioSpeed = 680
+			break
+		default:
+			audioSpeed = 850
+	}
 
 	const setOrResetSamples = useCallback(() => {
 		if (characterData) {
@@ -85,6 +99,7 @@ const SpeechBox = ({ className }) => {
 					wordTimeoutsRef,
 					descriptionElement: cardDescriptionRef,
 					setIsSpeaking,
+					audioSpeed
 				})
 			} else { // cardData gets reset to null before a search
 				reset()
