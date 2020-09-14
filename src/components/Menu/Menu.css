@@ -19,6 +19,10 @@
 	width: 48px;
 }
 
+.closeIcon {
+	fill: white;
+}
+
 .iconButton {
 	align-self: flex-start;
 	background-color: transparent;

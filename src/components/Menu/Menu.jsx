@@ -19,7 +19,7 @@ const Button = ({ setIsMenuOpen, type, className }) => {
 			{ternary(
 				isMenuButton,
 				<MenuIcon className={classString} />,
-				<XIcon className={classString} />
+				<XIcon className={classString} colorClassName={classes.closeIcon} />
 			)}
 		</button>
 	)
@@ -38,7 +38,10 @@ const Menu = () => {
 				isMenuOpen,
 				<div className={classes.menuOverlay}>
 					<div className={classes.menuContent}>
-						<Button type="close" setIsMenuOpen={setIsMenuOpen} />
+						<Button
+							type="close"
+							setIsMenuOpen={setIsMenuOpen}
+						/>
 					</div>
 				</div>
 			)}
