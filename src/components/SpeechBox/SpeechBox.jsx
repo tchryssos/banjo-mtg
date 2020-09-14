@@ -8,8 +8,8 @@ import CharacterContext from '/src/logic/contexts/character'
 import orNull from '/src/logic/utils/orNull'
 import { speakAndSet } from '/src/logic/speech'
 
-import Image from '/src/components/Image'
 import Body from '/src/components/typography/Body'
+import CharacterPortrait from '/src/components/CharacterPortrait'
 
 import { CHARACTER_DATA } from '/src/constants/character'
 
@@ -99,13 +99,12 @@ const SpeechBox = ({ className }) => {
 		cardData,
 		(
 			<div className={`${className} ${classes.textBox}`}>
-				<Image
-					src={characterData.icon}
-					alt={character}
+				<CharacterPortrait
 					className={`
 						${classes.characterHead}${' '}
-						${isSpeaking && classes.speakingHead}
 					`}
+					character={character}
+					shouldAnimate={isSpeaking}
 				/>
 				<div className={classes.cardDesc} ref={cardDescriptionRef}>
 					<Body>{displayText}</Body>
