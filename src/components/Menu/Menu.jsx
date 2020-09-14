@@ -1,11 +1,16 @@
 import { h, Fragment } from 'preact'
-import { useState } from 'preact/hooks'
+import { useState, useContext } from 'preact/hooks'
 
 import orNull from '/src/logic/utils/orNull'
 import ternary from '/src/logic/utils/ternary'
+import CharacterContext from '/src/logic/contexts/character'
+
+import { CHARACTER_DATA } from '/src/constants/character'
 
 import MenuIcon from '/src/components/icons/Menu'
 import XIcon from '/src/components/icons/X'
+import Body from '/src/components/typography/Body'
+
 import * as classes from './Menu.css'
 
 const Button = ({ setIsMenuOpen, type, className }) => {
@@ -25,7 +30,12 @@ const Button = ({ setIsMenuOpen, type, className }) => {
 	)
 }
 
+const CharacterSelectPortrait = ({ setCharacter, character, type }) => {
+
+}
+
 const Menu = () => {
+	const { setCharacter, character } = useContext(CharacterContext)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	return (
 		<Fragment>
@@ -42,6 +52,11 @@ const Menu = () => {
 							type="close"
 							setIsMenuOpen={setIsMenuOpen}
 						/>
+						<div className={classes.characterSelectBlock}>
+							<Body className={classes.text}>
+								Select a character to read your cards
+							</Body>
+						</div>
 					</div>
 				</div>
 			)}
