@@ -8,6 +8,7 @@ import Body from '/src/components/typography/Body'
 import Search from '/src/components/Search'
 import SpeechBox from '/src/components/SpeechBox'
 import Title from '/src/components/typography/Title'
+import Menu from '/src/components/Menu'
 
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
@@ -24,6 +25,7 @@ const App = () => {
 		<CardContext.Provider value={{ cardData, setCardData }}>
 			<CharacterContext.Provider value={{ character, setCharacter }}>
 				<div className={classes.app}>
+					<Menu />
 					<div className={classes.banjoJaceWrapper}>
 						<Image
 							src={BanjoJace}

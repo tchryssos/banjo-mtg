@@ -1,0 +1,29 @@
+.menuOverlay {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.menuContent {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 16px;
+}
+
+.icon {
+	height: 48px;
+	width: 48px;
+}
+
+.iconButton {
+	align-self: flex-start;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	display: inline-flex;
+}

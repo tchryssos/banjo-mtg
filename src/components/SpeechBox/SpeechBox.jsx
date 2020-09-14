@@ -60,10 +60,10 @@ const SpeechBox = ({ className }) => {
 		)
 		textRef.current = ''
 		syllableTimeoutsRef.current.forEach(
-			(to) => clearTimeout(to)
+			(timeout) => clearTimeout(timeout)
 		)
 		wordTimeoutsRef.current.forEach(
-			(to) => clearTimeout(to)
+			(timeout) => clearTimeout(timeout)
 		)
 		setDisplayText('')
 	}, [audioArray])
