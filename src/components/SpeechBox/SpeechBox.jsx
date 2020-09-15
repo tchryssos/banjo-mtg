@@ -41,7 +41,7 @@ const SpeechBox = ({ className }) => {
 		case GRUNTILDA:
 			audioSpeed = 680
 			break
-		default:
+		default: // BANJO
 			audioSpeed = 850
 	}
 

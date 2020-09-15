@@ -78,7 +78,6 @@ const playSyllablePushWord = ({
 		(audio, i) => {
 			syllableTimeoutsRef.current.push(setTimeout(() => {
 				playAudio(audio, audioArray)
-				// @TODO return list of syllables to component and set up the timeouts there
 				let newText = `${textRef.current}${syllables[i]}`
 				// add a space if this is the last time through the loop
 				// aka the end of the word

@@ -34,7 +34,9 @@ const Button = ({ setIsMenuOpen, type, className }) => {
 
 const CharacterSelectPortrait = ({ setCharacter, setCardData, character, type }) => (
 	<button
-		onClick={() => {
+		onClick={(e) => {
+			e.preventDefault()
+			e.stopPropagation()
 			setCardData(null)
 			setCharacter(type)
 		}}
@@ -63,7 +65,7 @@ const Menu = () => {
 			)}
 			{orNull(
 				isMenuOpen,
-				<div className={classes.menuOverlay}>
+				<div className={classes.menuOverlay} onClick={() => setIsMenuOpen(false)}>
 					<div className={classes.menuContent}>
 						<Button
 							type="close"
