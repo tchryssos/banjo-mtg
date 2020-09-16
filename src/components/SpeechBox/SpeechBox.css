@@ -32,6 +32,6 @@
 }
 
 .cardDesc {
-	max-height: 56px;
-	overflow: hidden;
+	/* max-height: 56px; */
+	/* overflow: hidden; */
 }
