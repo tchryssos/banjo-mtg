@@ -34,8 +34,12 @@ const cardSuccess = (responseData, searchVal) => {
 	).data
 }
 
-export const cardSearch = async (searchVal, setCardData) => {
-	safariAudioSetup()
+export const cardSearch = async (searchVal, setCardData, isFirstSearch) => {
+	if (isFirstSearch) {
+		// See comments in function def for explanation on what this does
+		// We only need to set up safari audio workarounds on the first search
+		safariAudioSetup()
+	}
 	if (!searchVal) {
 		return { error: 'Please include a card ID or name' }
 	}

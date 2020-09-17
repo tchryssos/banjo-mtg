@@ -1,14 +1,23 @@
 // START - SETUP - START
-/*
-	Safari (and maybe other browsers) don't allow auto-play unmuted audio.
-	In this case, loading and playing audio files after an async fetch counts as
-	auto-play.
+export const safariAudioSetup = () => {
+	// Safari audio is choppy unless audio context is created
+	// See https://stackoverflow.com/a/54119854
+	const AudioContext = window.AudioContext || window.webkitAudioContext
+	if (AudioContext) {
+		new AudioContext()
+	}
 
-	We can get around this by creating and playing an audio object in response to
-	any button press (in this case, the search button press).
-	Once a user has "allowed" audio playback, all future audio will play fine.
-*/
-export const safariAudioSetup = () => new Audio().play()
+	/*
+		Safari (and maybe other browsers) don't allow auto-play unmuted audio.
+		In this case, loading and playing audio files after an async fetch counts as
+		auto-play.
+
+		We can get around this by creating and playing an audio object in response to
+		any button press (in this case, the search button press).
+		Once a user has "allowed" audio playback, all future audio will play fine.
+	*/
+	new Audio().play()
+}
 // END - SETUP - END
 
 // START - AUDIO PLAYBACK - START

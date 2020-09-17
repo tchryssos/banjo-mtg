@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact'
-import { useState, useContext } from 'preact/hooks'
+import { useState, useContext, useRef } from 'preact/hooks'
 
 import Loading from '/src/components/icons/Loading'
 
@@ -13,16 +13,18 @@ const Search = () => {
 	const { setCardData } = useContext(CardContext)
 	const [searchVal, setSearchVal] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
+	const firstSearchRef = useRef(true)
 	const onChange = (e) => setSearchVal(e.target.value)
 	const onSubmit = async () => {
 		setIsLoading(true)
-		const data = await cardSearch(searchVal, setCardData)
+		const data = await cardSearch(searchVal, setCardData, firstSearchRef.current)
 		setIsLoading(false)
 		if (data.error) {
 			console.warn(data.error)
 		} else {
 			setCardData(data)
 		}
+		firstSearchRef.current = false
 		setSearchVal('')
 	}
 	return (
