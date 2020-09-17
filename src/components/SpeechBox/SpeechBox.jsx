@@ -7,7 +7,7 @@ import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
 import BrowserContext from '/src/logic/contexts/browser'
 import orNull from '/src/logic/utils/orNull'
-import { speakAndSet } from '/src/logic/speech'
+import { speakAndSet, safariAudioSetup } from '/src/logic/speech'
 
 import Body from '/src/components/typography/Body'
 import CharacterPortrait from '/src/components/CharacterPortrait'
@@ -122,43 +122,31 @@ const SpeechBox = ({ className }) => {
 		}
 	}, [cardData])
 
-	return orNull(
-		cardData,
-		(
-			<Fragment>
-				{orNull(
-					browser === SAFARI && !userHasPlayed,
-					<Button
-						onClick={() => {
-							speakAndSet({
-								responseText: cardData.text || cardData.flavor,
-								textRef,
-								setDisplayText,
-								voiceArray: audioArray,
-								syllableTimeoutsRef,
-								wordTimeoutsRef,
-								setIsSpeaking,
-								audioSpeed
-							})
-							setUserHasPlayed(true)
-						}}
-						className={classes.playButton}
-					>
-						<Play />
-					</Button>
-				)}
-				<div className={`${className} ${classes.textBox}`}>
-					<CharacterPortrait
-						className={classes.characterHead}
-						character={character}
-						shouldAnimate={isSpeaking}
-					/>
-					<div className={classes.cardDesc} ref={cardDescriptionRef}>
-						<Body>{displayText}</Body>
-					</div>
-				</div>
-			</Fragment>
-		),
+	if (!cardData) {
+		return orNull(
+			browser === SAFARI && !userHasPlayed,
+			<Button
+				onClick={() => {
+					safariAudioSetup()
+					setUserHasPlayed(true)
+				}}
+				className={classes.playButton}
+			>
+				<Play />
+			</Button>
+		)
+	}
+	return (
+		<div className={`${className} ${classes.textBox}`}>
+		<CharacterPortrait
+			className={classes.characterHead}
+			character={character}
+			shouldAnimate={isSpeaking}
+		/>
+		<div className={classes.cardDesc} ref={cardDescriptionRef}>
+			<Body>{displayText}</Body>
+		</div>
+	</div>
 	)
 }
 

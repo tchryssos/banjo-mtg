@@ -1,3 +1,7 @@
+// START - SETUP - START
+export const safariAudioSetup = () => new Audio().play()
+// END - SETUP - END
+
 // START - AUDIO PLAYBACK - START
 const playAudio = (audio, audioArray) => {
 	// This pauses any playing audio before playback of the next sample
