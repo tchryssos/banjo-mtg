@@ -1,3 +1,4 @@
+import { safariAudioSetup } from '/src/logic/speech'
 import checkSimilarity, { createNGram } from '/src/logic/utils/checkSimilarity'
 
 const isCardId = (id) => !!parseInt(id, 10)
@@ -34,6 +35,7 @@ const cardSuccess = (responseData, searchVal) => {
 }
 
 export const cardSearch = async (searchVal, setCardData) => {
+	safariAudioSetup()
 	if (!searchVal) {
 		return { error: 'Please include a card ID or name' }
 	}
