@@ -30,3 +30,8 @@
 .speakingHead {
 	animation-name: headRotate;
 }
+
+.playButton {
+	height: 64px;
+	width: 64px;
+}

@@ -1,27 +1,33 @@
-import { h } from 'preact'
+import { h, Fragment } from 'preact'
 import {
 	useContext, useRef, useState, useEffect, useCallback,
 } from 'preact/hooks'
 
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
+import BrowserContext from '/src/logic/contexts/browser'
 import orNull from '/src/logic/utils/orNull'
 import { speakAndSet } from '/src/logic/speech'
 
 import Body from '/src/components/typography/Body'
 import CharacterPortrait from '/src/components/CharacterPortrait'
+import Play from '/src/components/icons/Play'
+import Button from '/src/components/Button'
 
 import { CHARACTER_DATA, KAZOOIE, GRUNTILDA } from '/src/constants/character'
+import { SAFARI } from '/src/constants/browser'
 
 import * as classes from './SpeechBox.css'
 
 const SpeechBox = ({ className }) => {
 	const [audioArray, setAudioArray] = useState([])
 	const [isSpeaking, setIsSpeaking] = useState(false)
+	const [userHasPlayed, setUserHasPlayed] = useState(false)
 	const [displayText, setDisplayText] = useState('')
 
 	const { cardData } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
+	const { browser } = useContext(BrowserContext)
 
 	const textRef = useRef('')
 	const syllableTimeoutsRef = useRef([])
@@ -89,7 +95,14 @@ const SpeechBox = ({ className }) => {
 
 	useEffect(() => {
 		if (isInitializedRef.current) { // Only run this after initialization of component
-			if (cardData && cardDescriptionRef.current) {
+			if (
+				cardData
+				&& cardDescriptionRef.current
+				&& !(browser === SAFARI && !userHasPlayed)
+			) {
+				// Safari doesn't allow auto-play audio
+				// so we need to allow the user to enable audio on each card search
+				// @TODO there may be a way to have audio begin 'muted'
 				speakAndSet({
 					responseText: cardData.text || cardData.flavor,
 					textRef,
@@ -112,18 +125,39 @@ const SpeechBox = ({ className }) => {
 	return orNull(
 		cardData,
 		(
-			<div className={`${className} ${classes.textBox}`}>
-				<CharacterPortrait
-					className={`
-						${classes.characterHead}${' '}
-					`}
-					character={character}
-					shouldAnimate={isSpeaking}
-				/>
-				<div className={classes.cardDesc} ref={cardDescriptionRef}>
-					<Body>{displayText}</Body>
+			<Fragment>
+				{orNull(
+					browser === SAFARI && !userHasPlayed,
+					<Button
+						onClick={() => {
+							speakAndSet({
+								responseText: cardData.text || cardData.flavor,
+								textRef,
+								setDisplayText,
+								voiceArray: audioArray,
+								syllableTimeoutsRef,
+								wordTimeoutsRef,
+								setIsSpeaking,
+								audioSpeed
+							})
+							setUserHasPlayed(true)
+						}}
+						className={classes.playButton}
+					>
+						<Play />
+					</Button>
+				)}
+				<div className={`${className} ${classes.textBox}`}>
+					<CharacterPortrait
+						className={classes.characterHead}
+						character={character}
+						shouldAnimate={isSpeaking}
+					/>
+					<div className={classes.cardDesc} ref={cardDescriptionRef}>
+						<Body>{displayText}</Body>
+					</div>
 				</div>
-			</div>
+			</Fragment>
 		),
 	)
 }

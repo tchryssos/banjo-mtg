@@ -27,7 +27,7 @@ const App = () => {
 	const [character, setCharacter] = useState(BANJO)
 	const [browser, setBrowser] = useState('')
 	
-	const { userAgent = '', vendor } = navigator
+	const { userAgent = '', vendor = '' } = navigator
 	const lUserAgent = userAgent.toLowerCase()
 	if (lUserAgent.includes('firefox')) {
 		setBrowser(FIREFOX)
@@ -40,8 +40,6 @@ const App = () => {
 	} else {
 		setBrowser(UNSUPPORTED)
 	}
-
-	console.log(browser)
 
 	return (
 		<BrowserContext.Provider value={{ browser }}>
