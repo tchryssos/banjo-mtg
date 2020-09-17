@@ -1,11 +1,11 @@
 // START - STYLE - START
 const descriptionOverflow = (descriptionElement) => {
-	// if (descriptionElement.current) {
-	// 	const descEl = descriptionElement.current
-	// 	if (descEl.offsetHeight < descEl.scrollHeight) {
-	// 		descEl.scrollTop = descEl.scrollHeight
-	// 	}
-	// }
+	if (descriptionElement.current) {
+		const descEl = descriptionElement.current
+		if (descEl.offsetHeight < descEl.scrollHeight) {
+			descEl.scrollTop = descEl.scrollHeight
+		}
+	}
 }
 // END - STYLE - END
 
@@ -80,14 +80,6 @@ const playSyllablePushWord = ({
 			syllableTimeoutsRef.current.push(setTimeout(() => {
 				playAudio(audio, audioArray)
 				let newText = `${textRef.current}${syllables[i]}`
-				console.log({
-					syl: syllables[i],
-					currTime: i * audio.duration * audioSpeed,
-					// noI: audio.duration * audioSpeed,
-					i,
-					audioSpeed,
-					duration: audio.duration,
-				})
 				// add a space if this is the last time through the loop
 				// aka the end of the word
 				if (i === audioArray.length - 1) {
@@ -126,7 +118,6 @@ export const speakAndSet = ({
 	setIsSpeaking(true)
 	const words = responseText.split(/\s/)
 	let speechPause = 0
-	console.log('WORDS: ', words)
 	words.forEach(
 		(word, i) => {
 			/*

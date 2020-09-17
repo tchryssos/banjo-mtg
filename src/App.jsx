@@ -14,13 +14,13 @@ import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
 import orNull from '/src/logic/utils/orNull'
 
-import { BANJO, KAZOOIE } from '/src/constants/character'
+import { BANJO } from '/src/constants/character'
 
 import BanjoJace from '/src/static/images/banjo_jace.png'
 
 const App = () => {
 	const [cardData, setCardData] = useState()
-	const [character, setCharacter] = useState(KAZOOIE)
+	const [character, setCharacter] = useState(BANJO)
 	return (
 		<CardContext.Provider value={{ cardData, setCardData }}>
 			<CharacterContext.Provider value={{ character, setCharacter }}>
