@@ -1,14 +1,3 @@
-// START - STYLE - START
-const descriptionOverflow = (descriptionElement) => {
-	if (descriptionElement.current) {
-		const descEl = descriptionElement.current
-		if (descEl.offsetHeight < descEl.scrollHeight) {
-			descEl.scrollTop = descEl.scrollHeight
-		}
-	}
-}
-// END - STYLE - END
-
 // START - AUDIO PLAYBACK - START
 const playAudio = (audio, audioArray) => {
 	// This pauses any playing audio before playback of the next sample
@@ -90,7 +79,6 @@ const playSyllablePushWord = ({
 				}
 				textRef.current = newText
 				setDisplayText(newText)
-				descriptionOverflow(descriptionElement)
 			}, (i * avgDuration * audioSpeed)))
 		}
 	)

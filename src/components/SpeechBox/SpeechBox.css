@@ -30,8 +30,3 @@
 .speakingHead {
 	animation-name: headRotate;
 }
-
-.cardDesc {
-	max-height: 56px;
-	overflow: hidden;
-}
