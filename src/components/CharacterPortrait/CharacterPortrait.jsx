@@ -9,6 +9,7 @@ import * as classes from './CharacterPortrait.css'
 const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO }) => {
 	const characterData = CHARACTER_DATA[character]
 	const { browser } = useContext(BrowserContext)
+	const safariRotate = browser === SAFARI && shouldAnimate
 	return (
 		<picture>
 			<source
@@ -19,7 +20,7 @@ const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO 
 				src={characterData.icon}
 				alt={character}
 				className={`
-					${classes.portrait} ${className} ${browser === SAFARI && classes.rotateHead}
+					${classes.portrait} ${className} ${safariRotate && classes.rotateHead}
 				`}
 			/>
 		</picture>
