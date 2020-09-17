@@ -97,7 +97,6 @@ const SpeechBox = ({ className }) => {
 					voiceArray: audioArray,
 					syllableTimeoutsRef,
 					wordTimeoutsRef,
-					descriptionElement: cardDescriptionRef,
 					setIsSpeaking,
 					audioSpeed
 				})

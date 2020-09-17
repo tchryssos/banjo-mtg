@@ -61,7 +61,7 @@ const syllableWordChunker = (word) => {
 
 const playSyllablePushWord = ({
 	syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-	descriptionElement, setIsSpeaking, isLastWord, audioSpeed,
+	setIsSpeaking, isLastWord, audioSpeed,
 }) => {
 	const avgDuration = audioArray.reduce((acc, cur) => acc += cur.duration, 0) / audioArray.length
 	audioArray.forEach(
@@ -96,7 +96,6 @@ export const speakAndSet = ({
 		syllableTimeoutsRef,
 		setDisplayText,
 		wordTimeoutsRef,
-		descriptionElement,
 		setIsSpeaking,
 		// Multiplier to convert seconds from audio duration to milliseconds
 		// By dropping the multiplier from 1000, we're able to speed up playback.
@@ -130,7 +129,7 @@ export const speakAndSet = ({
 					const isLastWord = i === words.length - 1
 					playSyllablePushWord({
 						syllables, audioArray, syllableTimeoutsRef, textRef, setDisplayText,
-						descriptionElement, setIsSpeaking, isLastWord, audioSpeed,
+						setIsSpeaking, isLastWord, audioSpeed,
 					})
 				}, speechPause,
 			))
