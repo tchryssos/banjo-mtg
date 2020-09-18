@@ -50,3 +50,7 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+.menu {
+	margin-top: 16px;
+}

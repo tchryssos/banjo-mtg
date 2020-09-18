@@ -1,7 +1,6 @@
-import { h, Fragment } from 'preact'
-import { useState, useContext } from 'preact/hooks'
+import { h } from 'preact'
+import { useContext } from 'preact/hooks'
 
-import orNull from '/src/logic/utils/orNull'
 import ternary from '/src/logic/utils/ternary'
 import CharacterContext from '/src/logic/contexts/character'
 import CardContext from '/src/logic/contexts/card'
@@ -52,46 +51,27 @@ const CharacterSelectPortrait = ({ setCharacter, setCardData, character, type })
 	</button>
 )
 
-const Menu = () => {
+const Menu = ({ className }) => {
 	const { setCharacter, character } = useContext(CharacterContext)
 	const { setCardData } = useContext(CardContext)
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	return (
-		<Fragment>
-			{ternary(
-				isMenuOpen,
-				<div className={classes.icon} />,
-				<Button type="menu" setIsMenuOpen={setIsMenuOpen} />,
-			)}
-			{orNull(
-				isMenuOpen,
-				<div className={classes.menuOverlay} onClick={() => setIsMenuOpen(false)}>
-					<div className={classes.menuContent}>
-						<Button
-							type="close"
-							setIsMenuOpen={setIsMenuOpen}
+		<div className={`${classes.menuContent} ${className}`}>
+			<Body className={classes.text}>
+				Select a character to read your cards
+			</Body>
+			<div className={classes.portraitRow}>
+				{Object.keys(CHARACTER_DATA).map(
+					(charKey) => (
+						<CharacterSelectPortrait
+							type={charKey}
+							character={character}
+							setCharacter={setCharacter}
+							setCardData={setCardData}
 						/>
-						<div className={classes.characterSelectBlock}>
-							<Body className={classes.text}>
-								Select a character to read your cards
-							</Body>
-							<div className={classes.portraitRow}>
-								{Object.keys(CHARACTER_DATA).map(
-									(charKey) => (
-										<CharacterSelectPortrait
-											type={charKey}
-											character={character}
-											setCharacter={setCharacter}
-											setCardData={setCardData}
-										/>
-									)
-								)}
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
-		</Fragment>
+					)
+				)}
+			</div>
+		</div>
 	)
 }
 

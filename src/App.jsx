@@ -14,6 +14,7 @@ import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
 import BrowserContext from '/src/logic/contexts/browser'
 import orNull from '/src/logic/utils/orNull'
+import capitalize from '/src/logic/utils/capitalize'
 
 import { BANJO } from '/src/constants/character'
 import {
@@ -46,11 +47,12 @@ const App = () => {
 			<CardContext.Provider value={{ cardData, setCardData }}>
 				<CharacterContext.Provider value={{ character, setCharacter }}>
 					<div className={classes.app}>
+
 						<div className={classes.backgroundContainer}>
 							<div className={classes.background} />
 						</div>
+
 						<div className={classes.pageWrapper}>
-							<Menu />
 							<div className={classes.banjoJaceWrapper}>
 								<Image
 									src={BanjoJace}
@@ -60,7 +62,9 @@ const App = () => {
 							</div>
 							<div className={classes.contentContainer}>
 								<Body>
-									Enter the Multiverse ID or name of a Magic the Gathering card to have Banjo read the card text!
+									Enter the Multiverse ID or name of a Magic the Gathering card to have
+									{` ${capitalize(character)} `}
+									read the card text!
 								</Body>
 								<Search />
 								{orNull(
@@ -68,6 +72,7 @@ const App = () => {
 									<Title>{cardData?.name}</Title>
 								)}
 								<SpeechBox />
+								<Menu className={classes.menu} />
 							</div>
 						</div>
 					</div>
