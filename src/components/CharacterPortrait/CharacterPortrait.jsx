@@ -20,7 +20,7 @@ const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO 
 				src={characterData.icon}
 				alt={character}
 				className={`
-					${classes.portrait} ${className} ${safariRotate && classes.rotateHead}
+					${classes.portrait} ${safariRotate && classes.rotateHead} ${className}
 				`}
 			/>
 		</picture>

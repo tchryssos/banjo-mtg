@@ -66,12 +66,16 @@ const App = () => {
 									{` ${capitalize(character)} `}
 									read the card text!
 								</Body>
+
 								<Search />
+
 								{orNull(
 									cardData,
-									<Title>{cardData?.name}</Title>
+									<Title className={classes.cardTitle}>{cardData?.name}</Title>
 								)}
+
 								<SpeechBox />
+
 								<Menu className={classes.menu} />
 							</div>
 						</div>

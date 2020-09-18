@@ -47,6 +47,7 @@ const CharacterSelectPortrait = ({ setCharacter, setCardData, character, type })
 		<CharacterPortrait
 			character={type}
 			shouldAnimate={character === type}
+			className={classes.menuPortrait}
 		/>
 	</button>
 )

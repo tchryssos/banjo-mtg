@@ -6,6 +6,11 @@
 	justify-content: center;
 }
 
+.menuPortrait {
+	height: 60px;
+	width: 60px;
+}
+
 .icon {
 	height: 48px;
 	width: 48px;
@@ -41,4 +46,11 @@
 
 .currentSelection {
 	filter: grayscale(0)
+}
+
+@media only screen and (min-width: 600px) {
+	.menuPortrait {
+		height: unset;
+		width: unset;
+	}
 }
