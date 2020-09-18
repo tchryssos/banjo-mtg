@@ -15,6 +15,10 @@ export const safariAudioSetup = () => {
 		We can get around this by creating and playing an audio object in response to
 		any button press (in this case, the search button press).
 		Once a user has "allowed" audio playback, all future audio will play fine.
+
+		Firefox throws a warning about trying to load and play audio from an invalid
+		src but runs just fine, and every other browser complains about trying to work around
+		that, so I'm just letting it fly
 	*/
 	new Audio().play()
 }

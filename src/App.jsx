@@ -46,24 +46,29 @@ const App = () => {
 			<CardContext.Provider value={{ cardData, setCardData }}>
 				<CharacterContext.Provider value={{ character, setCharacter }}>
 					<div className={classes.app}>
-						<Menu />
-						<div className={classes.banjoJaceWrapper}>
-							<Image
-								src={BanjoJace}
-								alt="Banjo the Mindwalker"
-								className={classes.banjoJace}
-							/>
+						<div className={classes.backgroundContainer}>
+							<div className={classes.background} />
 						</div>
-						<div className={classes.contentContainer}>
-							<Body>
-								Enter the Multiverse ID or name of a Magic the Gathering card to have Banjo read the card text!
-							</Body>
-							<Search />
-							{orNull(
-								cardData,
-								<Title>{cardData?.name}</Title>
-							)}
-							<SpeechBox />
+						<div className={classes.pageWrapper}>
+							<Menu />
+							<div className={classes.banjoJaceWrapper}>
+								<Image
+									src={BanjoJace}
+									alt="Banjo the Mindwalker"
+									className={classes.banjoJace}
+								/>
+							</div>
+							<div className={classes.contentContainer}>
+								<Body>
+									Enter the Multiverse ID or name of a Magic the Gathering card to have Banjo read the card text!
+								</Body>
+								<Search />
+								{orNull(
+									cardData,
+									<Title>{cardData?.name}</Title>
+								)}
+								<SpeechBox />
+							</div>
 						</div>
 					</div>
 				</CharacterContext.Provider>
