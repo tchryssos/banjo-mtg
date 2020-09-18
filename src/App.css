@@ -47,14 +47,15 @@
 .contentContainer {
 	padding-top: 16px;
 	max-width: 800px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.cardTitle {
+/* .cardTitle {
 	margin-top: 16px;
-}
+} */
 
 .menu {
 	margin-top: 16px;

@@ -11,27 +11,24 @@
 	letter-spacing: 2px;
 }
 
-@keyframes headRotate {
-	from {transform: rotate(7deg);}
-	to {transform: rotate(-21deg);}
-}
-
 .characterHead {
-	height: 100px;
-	width: 100px;
+	height: 60px;
+	width: 60px;
 	margin-right: 8px;
-	animation-duration: 0.3s;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-	animation-timing-function: linear;
 	flex: 0 0 auto;
 }
 
-.speakingHead {
-	animation-name: headRotate;
+.boxBody {
+	font-size: 1rem;
 }
 
-.playButton {
-	height: 64px;
-	width: 64px;
+@media only screen and (min-width: 600px) {
+	.characterHead {
+		height: 100px;
+		width: 100px;
+	}
+
+	.boxBody {
+		font-size: unset
+	}
 }

@@ -61,20 +61,13 @@ const App = () => {
 								/>
 							</div>
 							<div className={classes.contentContainer}>
-								<Body>
-									Enter the Multiverse ID or name of a Magic the Gathering card to have
-									{` ${capitalize(character)} `}
-									read the card text!
-								</Body>
-
-								<Search />
-
-								{orNull(
+							{orNull(
 									cardData,
 									<Title className={classes.cardTitle}>{cardData?.name}</Title>
 								)}
-
 								<SpeechBox />
+
+								<Search />
 
 								<Menu className={classes.menu} />
 							</div>

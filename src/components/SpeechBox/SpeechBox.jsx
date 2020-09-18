@@ -121,7 +121,7 @@ const SpeechBox = ({ className }) => {
 				shouldAnimate={isSpeaking}
 			/>
 			<div className={classes.cardDesc} ref={cardDescriptionRef}>
-				<Body>{displayText}</Body>
+				<Body className={classes.boxBody}>{displayText}</Body>
 			</div>
 		</div>
 	)
