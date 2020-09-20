@@ -1,5 +1,7 @@
 .app {
 	color: white;
+	position: relative;
+	min-height: 100%;
 }
 
 .backgroundContainer {
