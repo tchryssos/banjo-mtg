@@ -11,7 +11,7 @@ import { speakAndSet } from '/src/logic/speech'
 import Body from '/src/components/typography/Body'
 import CharacterPortrait from '/src/components/CharacterPortrait'
 
-import { CHARACTER_DATA, KAZOOIE, GRUNTILDA } from '/src/constants/character'
+import { CHARACTER_DATA, KAZOOIE, GRUNTILDA, BANJO } from '/src/constants/character'
 
 import * as classes from './SpeechBox.css'
 
@@ -118,7 +118,7 @@ const SpeechBox = ({ className }) => {
 		<div className={`${className} ${classes.textBox}`}>
 			<CharacterPortrait
 				className={classes.characterHead}
-				character={character}
+				character={cardError ? BANJO : character}
 				shouldAnimate={isSpeaking && !cardError}
 			/>
 			<div className={classes.cardDesc} ref={cardDescriptionRef}>
