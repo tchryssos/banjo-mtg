@@ -1,7 +1,7 @@
 {
-  "name": "parcel-template",
-  "version": "1.0.0",
-  "description": "A basic parcel project",
+  "name": "banjo_mtg",
+  "version": "2.0.0",
+  "description": "Banjo and Co. from the banjo kazooie games read the flavor and rules text of Magic the Gathering cards",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
