@@ -16,7 +16,7 @@ import orNull from '/src/logic/utils/orNull'
 import BanjoJace from '/src/static/images/banjo_jace.png'
 
 const AppContent = () => {
-	const { cardData } = useContext(CardContext)
+	const { cardData, cardError } = useContext(CardContext)
 
 	return (
 		<div className={classes.app}>
@@ -34,8 +34,10 @@ const AppContent = () => {
 				</div>
 				<div className={classes.contentContainer}>
 					{orNull(
-						cardData,
-						<Title className={classes.cardTitle}>{cardData?.name}</Title>
+						cardData || cardError,
+						<Title className={classes.cardTitle}>
+							{cardError ? 'Error!' : cardData?.name}
+						</Title>
 					)}
 					<SpeechBox />
 
