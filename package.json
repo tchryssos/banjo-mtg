@@ -15,7 +15,7 @@
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.9.0",
     "eslint-config-preact": "^1.1.1",
     "parcel-bundler": "^1.12.4"
   },
