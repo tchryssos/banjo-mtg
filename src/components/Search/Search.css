@@ -21,7 +21,6 @@
 }
 
 .loadingIcon {
-	margin: 16px;
 	height: 48px;
 	width: 48px;
 	animation-name: loadingRotate;

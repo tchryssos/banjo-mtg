@@ -1,82 +1,57 @@
 import 'regenerator-runtime/runtime'
 import { h } from 'preact'
-import { useState } from 'preact/hooks'
+import { useContext } from 'preact/hooks'
 import * as classes from './App.css'
 
+import Provider from '/src/components/Provider'
 import Image from '/src/components/Image'
-import Body from '/src/components/typography/Body'
 import Search from '/src/components/Search'
 import SpeechBox from '/src/components/SpeechBox'
 import Title from '/src/components/typography/Title'
 import Menu from '/src/components/Menu'
 
 import CardContext from '/src/logic/contexts/card'
-import CharacterContext from '/src/logic/contexts/character'
-import BrowserContext from '/src/logic/contexts/browser'
 import orNull from '/src/logic/utils/orNull'
-import capitalize from '/src/logic/utils/capitalize'
-
-import { BANJO } from '/src/constants/character'
-import {
-	FIREFOX, CHROME, SAFARI, EDGE, UNSUPPORTED,
-} from '/src/constants/browser'
 
 import BanjoJace from '/src/static/images/banjo_jace.png'
 
-const App = () => {
-	const [cardData, setCardData] = useState()
-	const [character, setCharacter] = useState(BANJO)
-	const [browser, setBrowser] = useState('')
-	
-	const { userAgent = '', vendor = '' } = navigator
-	const lUserAgent = userAgent.toLowerCase()
-	if (lUserAgent.includes('firefox')) {
-		setBrowser(FIREFOX)
-	} else if (lUserAgent.includes('edg/')) {
-		setBrowser(EDGE)
-	} else if (vendor.toLowerCase().includes('apple')) {
-		setBrowser(SAFARI)
-	} else if (lUserAgent.includes('chrome')) {
-		setBrowser(CHROME)
-	} else {
-		setBrowser(UNSUPPORTED)
-	}
+const AppContent = () => {
+	const { cardData } = useContext(CardContext)
 
 	return (
-		<BrowserContext.Provider value={{ browser }}>
-			<CardContext.Provider value={{ cardData, setCardData }}>
-				<CharacterContext.Provider value={{ character, setCharacter }}>
-					<div className={classes.app}>
+		<div className={classes.app}>
+			<div className={classes.backgroundContainer}>
+				<div className={classes.background} />
+			</div>
 
-						<div className={classes.backgroundContainer}>
-							<div className={classes.background} />
-						</div>
+			<div className={classes.pageWrapper}>
+				<div className={classes.banjoJaceWrapper}>
+					<Image
+						src={BanjoJace}
+						alt="Banjo the Mindwalker"
+						className={classes.banjoJace}
+					/>
+				</div>
+				<div className={classes.contentContainer}>
+					{orNull(
+						cardData,
+						<Title className={classes.cardTitle}>{cardData?.name}</Title>
+					)}
+					<SpeechBox />
 
-						<div className={classes.pageWrapper}>
-							<div className={classes.banjoJaceWrapper}>
-								<Image
-									src={BanjoJace}
-									alt="Banjo the Mindwalker"
-									className={classes.banjoJace}
-								/>
-							</div>
-							<div className={classes.contentContainer}>
-							{orNull(
-									cardData,
-									<Title className={classes.cardTitle}>{cardData?.name}</Title>
-								)}
-								<SpeechBox />
+					<Search />
 
-								<Search />
-
-								<Menu className={classes.menu} />
-							</div>
-						</div>
-					</div>
-				</CharacterContext.Provider>
-			</CardContext.Provider>
-		</BrowserContext.Provider>
+					<Menu className={classes.menu} />
+				</div>
+			</div>
+		</div>
 	)
 }
+
+const App = () => (
+	<Provider>
+		<AppContent />
+	</Provider>
+)
 
 export default App
