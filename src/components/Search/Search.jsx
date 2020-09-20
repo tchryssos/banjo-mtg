@@ -4,6 +4,8 @@ import { useState, useContext, useRef } from 'preact/hooks'
 import Loading from '/src/components/icons/Loading'
 import Body from '/src/components/typography/Body'
 
+import BanjoFail from '/src/static/audio/banjo_fail.wav'
+
 import { cardSearch } from '/src/logic/search'
 import CardContext from '/src/logic/contexts/card'
 import CharacterContext from '/src/logic/contexts/character'
@@ -13,20 +15,25 @@ import capitalize from '/src/logic/utils/capitalize'
 import * as classes from './Search.css'
 
 const Search = () => {
-	const { setCardData } = useContext(CardContext)
+	const { setCardData, setCardError } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
 	const [searchVal, setSearchVal] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [hasSearched, setHasSearched] = useState(false)
+	const errorAudioRef = useRef()
 	const onChange = (e) => setSearchVal(e.target.value)
 	const onSubmit = async () => {
 		const isFirstSearch = !hasSearched
 		setIsLoading(true)
 		setHasSearched(true)
-		const data = await cardSearch(searchVal, setCardData, isFirstSearch)
+		const data = await cardSearch(searchVal, setCardData, setCardError, isFirstSearch)
 		setIsLoading(false)
 		if (data.error) {
-			console.warn(data.error)
+			if (!errorAudioRef.current) {
+				errorAudioRef.current = new Audio(BanjoFail)
+			}
+			errorAudioRef.current.play()
+			setCardError(data.error)
 		} else {
 			setCardData(data)
 		}

@@ -12,6 +12,7 @@ import {
 
 const Provider = ({ children }) => {
 	const [cardData, setCardData] = useState()
+	const [cardError, setCardError] = useState('')
 	const [character, setCharacter] = useState(BANJO)
 	const [browser, setBrowser] = useState('')
 	
@@ -31,7 +32,7 @@ const Provider = ({ children }) => {
 
 	return (
 		<BrowserContext.Provider value={{ browser }}>
-			<CardContext.Provider value={{ cardData, setCardData }}>
+			<CardContext.Provider value={{ cardData, setCardData, cardError, setCardError }}>
 				<CharacterContext.Provider value={{ character, setCharacter }}>
 					{children}
 				</CharacterContext.Provider>

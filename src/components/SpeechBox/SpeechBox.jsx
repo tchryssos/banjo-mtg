@@ -20,7 +20,7 @@ const SpeechBox = ({ className }) => {
 	const [isSpeaking, setIsSpeaking] = useState(false)
 	const [displayText, setDisplayText] = useState('')
 
-	const { cardData } = useContext(CardContext)
+	const { cardData, cardError, setCardError } = useContext(CardContext)
 	const { character } = useContext(CharacterContext)
 
 	const textRef = useRef('')
@@ -83,6 +83,7 @@ const SpeechBox = ({ className }) => {
 	}, [audioArray])
 
 	useEffect(() => {
+		setCardError('')
 		reset()
 		setOrResetSamples()
 	}, [character])
@@ -113,15 +114,15 @@ const SpeechBox = ({ className }) => {
 	}, [cardData])
 
 	return orNull(
-		cardData,
+		cardData || cardError,
 		<div className={`${className} ${classes.textBox}`}>
 			<CharacterPortrait
 				className={classes.characterHead}
 				character={character}
-				shouldAnimate={isSpeaking}
+				shouldAnimate={isSpeaking && !cardError}
 			/>
 			<div className={classes.cardDesc} ref={cardDescriptionRef}>
-				<Body className={classes.boxBody}>{displayText}</Body>
+				<Body className={classes.boxBody}>{cardError || displayText}</Body>
 			</div>
 		</div>
 	)
