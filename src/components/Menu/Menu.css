@@ -50,7 +50,7 @@
 
 @media only screen and (min-width: 600px) {
 	.menuPortrait {
-		height: unset;
-		width: unset;
+		height: 100px;
+		width: 100px;
 	}
 }
