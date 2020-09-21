@@ -12,8 +12,6 @@ In this outstanding app (now built with preact!), type the name or ID of a Magic
 1. Implement a better (or really any) syllable matching function. See [this repo](https://github.com/nlp-compromise/nlp-syllables) for a potential option.
 
 ## Press
-I don't have a better place to save this stuff, so it'll go here. Some people actually wrote this thing up.
-
 [Kotaku](https://kotaku.com/listen-to-banjo-read-magic-the-gathering-cards-1832444207)
 
 [Destructoid](https://www.destructoid.com/someone-made-a-site-where-banjo-reads-magic-card-text-to-you-and-it-s-amazingly-wholesome-541957.phtml?utm_source=dlvr.it&utm_medium=twitter)
