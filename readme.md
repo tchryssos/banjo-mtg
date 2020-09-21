@@ -1,7 +1,7 @@
 # BANJO MTG
 
 ## Description
-In this outstanding app, type the name or ID of a Magic the Gathering card into the search bar to have Banjo and Co. from Banjo Kazooie read _either_ the rules text or the flavor text back to you. Banjo prioritizes rules text, and will only read flavor text if rules text doesn't exist. See 'Todo' section for more on this.
+In this outstanding app (now built with preact!), type the name or ID of a Magic the Gathering card into the search bar to have Banjo and Co. from Banjo Kazooie read _either_ the rules text or the flavor text back to you. Banjo prioritizes rules text, and will only read flavor text if rules text doesn't exist. See 'Todo' section for more on this.
 
 ## Known Issues
 * Super sketchy mobile support for audio. See [this reddit comment](https://www.reddit.com/r/magicTCG/comments/anenl1/i_made_a_website_where_banjo_from_banjo_kazooie/efssyzc_) for a list of devices and browsers users had issues with.
