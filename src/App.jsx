@@ -1,4 +1,4 @@
-// import 'regenerator-runtime/runtime'
+import 'regenerator-runtime/runtime'
 import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 import * as classes from './App.css'
