@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import Icon from '/src/components/icons/Icon'
+import Icon from 'ttt/components/icons/Icon'
 
 const Menu = ({ className }) => (
 	<Icon className={className}>

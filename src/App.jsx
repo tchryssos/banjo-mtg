@@ -3,17 +3,17 @@ import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 import * as classes from './App.css'
 
-import Provider from '/src/components/Provider'
-import Image from '/src/components/Image'
-import Search from '/src/components/Search'
-import SpeechBox from '/src/components/SpeechBox'
-import Title from '/src/components/typography/Title'
-import Menu from '/src/components/Menu'
+import Provider from 'ttt/components/Provider'
+import Image from 'ttt/components/Image'
+import Search from 'ttt/components/Search'
+import SpeechBox from 'ttt/components/SpeechBox'
+import Title from 'ttt/components/typography/Title'
+import Menu from 'ttt/components/Menu'
 
-import CardContext from '/src/logic/contexts/card'
-import orNull from '/src/logic/utils/orNull'
+import CardContext from 'ttt/logic/contexts/card'
+import orNull from 'ttt/logic/utils/orNull'
 
-import BanjoJace from '/src/static/images/banjo_jace.png'
+import BanjoJace from 'ttt/static/images/banjo_jace.png'
 
 const AppContent = () => {
 	const { cardData, cardError } = useContext(CardContext)

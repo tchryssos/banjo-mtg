@@ -1,16 +1,16 @@
 import { h, Fragment } from 'preact'
 import { useState, useContext, useRef } from 'preact/hooks'
 
-import Loading from '/src/components/icons/Loading'
-import Body from '/src/components/typography/Body'
+import Loading from 'ttt/components/icons/Loading'
+import Body from 'ttt/components/typography/Body'
 
-import BanjoFail from '/src/static/audio/banjo_fail.wav'
+import BanjoFail from 'ttt/static/audio/banjo_fail.wav'
 
-import { cardSearch } from '/src/logic/search'
-import CardContext from '/src/logic/contexts/card'
-import CharacterContext from '/src/logic/contexts/character'
-import orNull from '/src/logic/utils/orNull'
-import capitalize from '/src/logic/utils/capitalize'
+import { cardSearch } from 'ttt/logic/search'
+import CardContext from 'ttt/logic/contexts/card'
+import CharacterContext from 'ttt/logic/contexts/character'
+import orNull from 'ttt/logic/utils/orNull'
+import capitalize from 'ttt/logic/utils/capitalize'
 
 import * as classes from './Search.css'
 

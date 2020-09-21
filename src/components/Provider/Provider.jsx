@@ -1,14 +1,14 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
-import CardContext from '/src/logic/contexts/card'
-import CharacterContext from '/src/logic/contexts/character'
-import BrowserContext from '/src/logic/contexts/browser'
+import CardContext from 'ttt/logic/contexts/card'
+import CharacterContext from 'ttt/logic/contexts/character'
+import BrowserContext from 'ttt/logic/contexts/browser'
 
-import { BANJO } from '/src/constants/character'
+import { BANJO } from 'ttt/constants/character'
 import {
 	FIREFOX, CHROME, SAFARI, EDGE, UNSUPPORTED,
-} from '/src/constants/browser'
+} from 'ttt/constants/browser'
 
 const Provider = ({ children }) => {
 	const [cardData, setCardData] = useState()

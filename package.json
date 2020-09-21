@@ -8,6 +8,9 @@
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },
+  "alias": {
+    "ttt": "./src"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,6 +26,7 @@
     "postcss-modules": "^3.2.2",
     "preact": "^10.4.4",
     "ramda": "^0.27.0",
-    "src": "^1.1.2"
+    "src": "^1.1.2",
+    "ttt": "^1.0.3"
   }
 }

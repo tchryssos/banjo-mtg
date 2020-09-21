@@ -1,5 +1,5 @@
-import { safariAudioSetup } from '/src/logic/speech'
-import checkSimilarity, { createNGram } from '/src/logic/utils/checkSimilarity'
+import { safariAudioSetup } from 'ttt/logic/speech'
+import checkSimilarity, { createNGram } from 'ttt/logic/utils/checkSimilarity'
 
 const isCardId = (id) => !!parseInt(id, 10)
 

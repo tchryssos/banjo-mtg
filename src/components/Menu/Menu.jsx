@@ -1,16 +1,16 @@
 import { h } from 'preact'
 import { useContext } from 'preact/hooks'
 
-import ternary from '/src/logic/utils/ternary'
-import CharacterContext from '/src/logic/contexts/character'
-import CardContext from '/src/logic/contexts/card'
+import ternary from 'ttt/logic/utils/ternary'
+import CharacterContext from 'ttt/logic/contexts/character'
+import CardContext from 'ttt/logic/contexts/card'
 
-import { CHARACTER_DATA } from '/src/constants/character'
+import { CHARACTER_DATA } from 'ttt/constants/character'
 
-import MenuIcon from '/src/components/icons/Menu'
-import XIcon from '/src/components/icons/X'
-import Body from '/src/components/typography/Body'
-import CharacterPortrait from '/src/components/CharacterPortrait'
+import MenuIcon from 'ttt/components/icons/Menu'
+import XIcon from 'ttt/components/icons/X'
+import Body from 'ttt/components/typography/Body'
+import CharacterPortrait from 'ttt/components/CharacterPortrait'
 
 import * as classes from './Menu.css'
 

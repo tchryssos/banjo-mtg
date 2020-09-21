@@ -1,9 +1,9 @@
 import { h } from 'preact'
 import { useContext } from 'preact/hooks'
-import { CHARACTER_DATA, BANJO } from '/src/constants/character'
-import { SAFARI } from '/src/constants/browser'
-import BrowserContext from '/src/logic/contexts/browser'
-import Image from '/src/components/Image'
+import { CHARACTER_DATA, BANJO } from 'ttt/constants/character'
+import { SAFARI } from 'ttt/constants/browser'
+import BrowserContext from 'ttt/logic/contexts/browser'
+import Image from 'ttt/components/Image'
 import * as classes from './CharacterPortrait.css'
 
 const CharacterPortrait = ({ className, shouldAnimate = true, character = BANJO }) => {

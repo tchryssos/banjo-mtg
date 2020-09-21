@@ -3,15 +3,15 @@ import {
 	useContext, useRef, useState, useEffect, useCallback,
 } from 'preact/hooks'
 
-import CardContext from '/src/logic/contexts/card'
-import CharacterContext from '/src/logic/contexts/character'
-import orNull from '/src/logic/utils/orNull'
-import { speakAndSet } from '/src/logic/speech'
+import CardContext from 'ttt/logic/contexts/card'
+import CharacterContext from 'ttt/logic/contexts/character'
+import orNull from 'ttt/logic/utils/orNull'
+import { speakAndSet } from 'ttt/logic/speech'
 
-import Body from '/src/components/typography/Body'
-import CharacterPortrait from '/src/components/CharacterPortrait'
+import Body from 'ttt/components/typography/Body'
+import CharacterPortrait from 'ttt/components/CharacterPortrait'
 
-import { CHARACTER_DATA, KAZOOIE, GRUNTILDA, BANJO } from '/src/constants/character'
+import { CHARACTER_DATA, KAZOOIE, GRUNTILDA, BANJO } from 'ttt/constants/character'
 
 import * as classes from './SpeechBox.css'
 
